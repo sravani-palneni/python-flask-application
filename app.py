@@ -1,16 +1,25 @@
-from flask import Flask, request, redirect		# importing Flask class from flask module
+from flask import Flask, request, redirect, flash		# importing Flask class from flask module
 from flask import render_template
+import secrets
+import os
+from dotenv import load_dotenv
 from model import db, EmployeeDetails
 app = Flask(__name__)							# here flask is a constructor. With this we are creating an instance of flask class. 
 												# This instance of flask is used to handle all the requests and responses
 												# This flask constructor takes module name as the argument
 												#__name__ is a special variable. It holds the name of the current python file
 
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:postgres@localhost:5432/employee"	# SQLALCHEMY_DATABASE_URI: The database URI to specify the database you want to establish a connection with.
-																									# postgresql://username:password@host:port/database_name									
+
+# Load environment variables from .env file
+load_dotenv()
+
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("SQLALCHEMY_DATABASE_URI")	# SQLALCHEMY_DATABASE_URI: The database URI to specify the database you want to establish a connection with.
+																				# postgresql://username:password@host:port/database_name									
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False											    # A configuration to enable or disable tracking modifications of objects. 
 																									# You set it to False to disable tracking and use less memory
 db.init_app(app)
+
+app.secret_key = os.getenv('SECRET_KEY')
 
 @app.before_request
 def create_table():
@@ -36,7 +45,9 @@ def create():
         employee = EmployeeDetails(employee_id=employee_id, name=name, age=age, position=position)
         db.session.add(employee)
         db.session.commit()
-        return "Employee added successfully"
+        #return "Employee added successfully"
+        flash("Employee added successfully", 'success')
+        return redirect(f'/retrieve/{employee_id}')
     
 # Performing a RETRIEVE Operation on database
 	# Retrieving all employee Information
@@ -45,13 +56,15 @@ def RetrieveEmployeeList():
     employees = EmployeeDetails.query.all()
     return render_template('showemplist.html',employees = employees)
 
-	# Retrieving particular employee Details
+# Retrieving particular employee Details
 @app.route('/retrieve/<int:id>')
 def RetrieveSingleEmployee(id):
     employee = EmployeeDetails.query.filter_by(employee_id=id).first()
     if employee:
          return render_template('showemp.html', employee=employee)
-    return f"Employee with ID = {id} does not exist"
+    #return f"Employee with ID = {id} does not exist"
+    flash(f"Employee with ID {id} does not exist", 'danger')
+    return redirect(f'/empid')
 	
 # Performing a UPDATE Operation on database
 @app.route('/update/<int:id>', methods=['GET', 'POST'])
@@ -69,9 +82,12 @@ def update(id):
 
             db.session.add(employee)
             db.session.commit()
+            flash("Employee Updated successfully", 'success')
             return redirect(f'/retrieve/{id}')
         return render_template('updateemp.html', employee=employee)  
-    return f"Employee with id = {id} Does not exist"
+    #return f"Employee with id = {id} Does not exist"
+    flash(f"Employee with ID {id} does not exist", 'danger')
+    return redirect(f'/empid')
 
 # Performing a DELETE Operation on database
 @app.route('/delete/<int:id>', methods=['GET', 'POST'])
@@ -81,7 +97,11 @@ def delete(id):
         if employee:
             db.session.delete(employee)
             db.session.commit()
-            return "Employee Deleted successfully"
+            #return "Employee Deleted successfully"
+            flash("Employee Deleted successfully", 'success')
+            return redirect(f'/retrieve')
+        flash(f"Employee with ID {id} does not exist", 'danger')
+        return redirect(f'/empid')
 
 # Getting the Emp Id from the User
 @app.route('/empid', methods=['GET', 'POST'])																				
