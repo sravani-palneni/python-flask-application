@@ -1,11 +1,67 @@
 <html>
     <head>
-        <h4><b> Employee Details </b></h4>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     </head>
     <body>
+        <h1> Employee Hub </h1>
+        <div class="navbar">
+            <a href="http://127.0.0.1:5000">Home</a>
+            <a href="http://127.0.0.1:5000/retrieve">List of All Employees</a>
+            <a href="http://127.0.0.1:5000/create">Add New Employee</a>
+            <a href="http://127.0.0.1:5000/empid" class="active">Get Employee Details</a>
+        </div>
+        
+        <div class="content">
+            <h3> Employee Details </h3>
             <p><b>Enter Employee ID</b> <input type = "integer" id = "employeeid" /></p>
-            <button onclick="document.location='http://127.0.0.1:5000/retrieve/'+employeeid.value">Employee Details</button>
-            <button onclick="document.location='http://127.0.0.1:5000/update/'+ employeeid.value">Update Employee Details</button>
-            <button onclick="document.location='http://127.0.0.1:5000/delete/'+ employeeid.value">Delete Employee Details</button>
+
+            {% for category, message in get_flashed_messages(with_categories=true) %}
+            <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+
+            <button onclick="getEmployeeDetails()">Get Employee Details</button>
+            <button onclick="updateEmployeeDetails()">Update Employee Details</button>
+            <button onclick="deleteEmployeeDetails()">Delete Employee Details</button>
+
+            <div id="message" class ="message"></div>
+        </div>
+
+        <script>
+            function getEmployeeDetails() {
+                var employeeid = document.getElementById('employeeid').value;
+                var message = document.getElementById('message');
+
+                if (employeeid) {
+                    window.location.href = 'http://127.0.0.1:5000/retrieve/' + employeeid;
+                } else {
+                    message.innerHTML = 'Please enter an Employee ID';
+                }
+            }
+    
+            function updateEmployeeDetails() {
+                var employeeid = document.getElementById('employeeid').value;
+                var message = document.getElementById('message');
+
+                if (employeeid) {
+                    message.innerHTML = '';
+                    window.location.href = 'http://127.0.0.1:5000/update/' + employeeid;
+                } else {
+                    message.innerHTML = 'Please enter an Employee ID';
+                }
+            }
+    
+            function deleteEmployeeDetails() {
+                var employeeid = document.getElementById('employeeid').value;
+                var message = document.getElementById('message');
+
+                if (employeeid) {
+                    message.innerHTML = '';
+                    window.location.href = 'http://127.0.0.1:5000/delete/' + employeeid;
+                    
+                } else {
+                    message.innerHTML = 'Please enter an Employee ID';
+                }
+            }
+        </script>
     </body>
 </html>

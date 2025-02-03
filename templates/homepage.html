@@ -1,11 +1,23 @@
 <html>
     <head>
-        <h1 style="text-align:center"> Welcome to the Employee Information Portal</h1>
+        <h1> Employee Hub </h1>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     </head>
     <body>
-        <button style='margin-left:500px' onclick="document.location='http://127.0.0.1:5000/retrieve'"> List of All Employees </button>
-        <br/> <br/> <br/> <br/>
-        <button style='margin-left:300px' style='margin-right:100px' onclick="document.location='http://127.0.0.1:5000/create'">Add New Employee</button> <t/>
-        <button style='margin-left:300px' style='margin-right:100px' onclick="document.location='http://127.0.0.1:5000/empid'">Get Employee Details</button>
+        <div class="navbar">
+            <a href="http://127.0.0.1:5000" class="active">Home</a>
+            <a href="http://127.0.0.1:5000/retrieve">List of All Employees</a>
+            <a href="http://127.0.0.1:5000/create">Add New Employee</a>
+            <a href="http://127.0.0.1:5000/empid">Get Employee Details</a>
+        </div>
+        <div class="content">
+            <h3> Welcome to the Employee Information Portal </h3> <br/>
+            <p>Employee Hub is Python Flask CRUD Application <br/> <br/>
+                &emsp;&emsp;&emsp;The application helps to perform the following operation on the employee database <br/><br/>
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;* CREATE <br/><br/>
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;* RETRIEVE <br/><br/>
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;* UPDATE <br/><br/>
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;* DELETE </p>
+        </div>
     </body>
 </html>

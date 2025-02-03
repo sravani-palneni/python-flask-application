@@ -1,13 +1,51 @@
 <html>
-    <head>
-        <h4><b> List of all the Employees </b></h4>
+    <head>  
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     </head>
     <body>
-        {% for employee in employees %}
-        <p> <b> Employee with <u>Id:{{employee.employee_id}} </u> is </b> </p>
-        <p><b>Name: </b> {{employee.name}} </p>
-        <p><b>Age: </b> {{employee.age}} </p>
-        <p><b>Position: </b>{{employee.position}}</p></br>
+        <h1> Employee Hub </h1>
+        <div class="navbar">
+            <a href="http://127.0.0.1:5000">Home</a>
+            <a href="http://127.0.0.1:5000/retrieve" class="active">List of All Employees</a>
+            <a href="http://127.0.0.1:5000/create">Add New Employee</a>
+            <a href="http://127.0.0.1:5000/empid">Get Employee Details</a>
+        </div>
+        
+
+        {% for category, message in get_flashed_messages(with_categories=true) %}
+        <div class="flash {{ category }}">{{ message }}</div>
         {% endfor %}
+        
+        <div class="content">
+            <h3> List of all the Employees </h3>
+            <table>
+                <tr>
+                    <th> Employee ID </th>
+                    <th> Employee Name </th>
+                    <th> Employee Age </th>
+                    <th> Employee Position </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                {% for employee in employees %}
+                <tr>
+                    <td> {{employee.employee_id}} </td>
+                    <td> {{employee.name}} </td>
+                    <td> {{employee.age}} </td>
+                    <td> {{employee.position}} </td>
+                    <td>
+                        <form action='http://127.0.0.1:5000/update/{{employee.employee_id}}' method = "GET">
+                            <input type = "submit" value = "Edit" />
+                        </form>
+                    </td>
+                    <td>
+                        <form action='http://127.0.0.1:5000/delete/{{employee.employee_id}}' method = "GET">
+                            <input type = "submit" value = "Delete" />
+                        </form>
+                    </td>                
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
     </body>
 </html>

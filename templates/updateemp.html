@@ -1,13 +1,24 @@
 <html>
     <head>
-        <h4><b> Update the Details of Employee </b></h4>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     </head>
     <body>
-        <form action='' method = "POST">
-            <p><b>Name </b><input type = "text" name = "name" value="{{employee.name}}"/></p>
-            <p><b>Age </b><input type = "integer" name = "age"  value="{{employee.age}}"/></p>
-            <p><b>Position</b> <input type = "text" name = "position" value="{{employee.position}}"/></p>
-            <p><input type = "submit" value = "Submit" /></p>
-        </form>
+        <h1> Employee Hub </h1>
+        <div class="navbar">
+            <a href="http://127.0.0.1:5000">Home</a>
+            <a href="http://127.0.0.1:5000/retrieve">List of All Employees</a>
+            <a href="http://127.0.0.1:5000/create">Add New Employee</a>
+            <a href="http://127.0.0.1:5000/empid" class="active">Get Employee Details</a>
+        </div>
+        
+        <div class="content">
+            <h3> Update the Details of Employee </h3>
+            <form action='' method = "POST">
+                <p><b>Name </b><input type = "text" name = "name" value="{{employee.name}}"/></p>
+                <p><b>Age </b><input type = "integer" name = "age"  value="{{employee.age}}"/></p>
+                <p><b>Position</b> <input type = "text" name = "position" value="{{employee.position}}"/></p>
+                <p><input type = "submit" value = "Submit" /></p>
+            </form>
+        </div>
     </body>
 </html>

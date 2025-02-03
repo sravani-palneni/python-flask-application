@@ -1,11 +1,26 @@
 <html>
     <head>
-        <h4><b> Employee Details </b></h4>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     </head>
     <body>
-        <p> <b> Information about the employee with  <u>Id:{{employee.employee_id}} </u> is </b> </p>
-        <p><b>Name: </b> {{employee.name}} </p>
-        <p><b>Age: </b> {{employee.age}} </p>
-        <p><b>Position: </b>{{employee.position}}</p>
+        <h1> Employee Hub </h1>
+        <div class="navbar">
+            <a href="http://127.0.0.1:5000">Home</a>
+            <a href="http://127.0.0.1:5000/retrieve">List of All Employees</a>
+            <a href="http://127.0.0.1:5000/create">Add New Employee</a>
+            <a href="http://127.0.0.1:5000/empid" class="active">Get Employee Details</a>
+        </div>
+
+        {% for category, message in get_flashed_messages(with_categories=true) %}
+        <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+
+        <div class="content">
+            <h3> Employee Details </h3>
+                <p> <b> Employee Id: </b> {{employee.employee_id}} </p><br/>
+                <p><b>Name: </b> {{employee.name}} </p><br/>
+                <p><b>Age: </b> {{employee.age}} </p><br/>
+                <p><b>Position: </b>{{employee.position}}</p><br/>
+        </div>
     </body>
 </html>

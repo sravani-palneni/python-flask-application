@@ -1,0 +1,158 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: Arial;
+    background-color: #bee6d8;
+    color: #333;
+    padding: 20px;
+    font-size: 15px;
+}
+
+/* Header Styling */
+h1 {
+    text-align: center;
+    color: #0d0c83;
+    margin-bottom: 20px;
+}
+
+h3 {
+    color: #0d0c83;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+
+/* Buttons */
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: #44a879;;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #755eb4;
+}
+
+input[type="text"], input[type="integer"], select {
+    padding: 8px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
+    max-width: 300px;
+}
+
+input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #44a879;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    
+}
+
+input[type="submit"]:hover {
+    background-color: #755eb4;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    margin-top: 30px;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+th, td {
+    padding: 12px;
+}
+
+th {
+    background-color: #44a879;
+    color: white;
+}
+
+td input[type="submit"] {
+    background-color: #44a879;
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+td input[type="submit"]:hover {
+    background-color: #755eb4;
+}
+
+
+
+.navbar {
+    width: 250px; 
+    height: 60%;
+    position: fixed;
+    padding: 20px;
+  }
+  
+.navbar a {
+    background-color: #44a879; 
+    color: black; 
+    display: block; 
+    padding: 20px; 
+    text-decoration: none; 
+    text-align: center;
+    font-weight: bold;
+}
+  
+.navbar a:hover {
+    background-color: #88878a; 
+}
+  
+.navbar a.active {
+    background-color: #055e3d; 
+    color: white;
+}
+
+.content {
+    margin-left: 250px;  
+    padding: 20px;
+    flex-grow: 1;
+}
+
+
+.flash.success {
+    text-align: center;
+    color: #0c836d;
+    margin-top: 10px;
+    margin-top: 10px;
+}
+
+.flash.danger {
+    text-align: left;
+    color: #b91a1a;
+    margin-top: 10px;
+    margin-top: 10px;
+}
+
+.message {
+    color: red; 
+    margin-top: 10px;
+}
